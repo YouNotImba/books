@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Book crud</title>
+<link rel="stylesheet" href="../static/css/tableGen.css"
+	th:href="@{/css/tableGen.css}">
+</head>
+<body>
+	<div id="container">
+		<form action="#" th:action="@{/merge}" th:object="${editedBook}"
+			method="post" style="padding-top: 100px;">
+			<fieldset style="width: 20%; margin: auto; !important">
+				<legend>
+					<h2>Edit book</h2>
+				</legend>
+
+				<input type="hidden" th:field="*{id}" th:value="*{id}">
+				<p>
+					<label for="title">Title</label>
+				</p>
+
+				<p>
+					<input type="text" th:field="*{title}" id="title"
+						th:value="*{title}">
+				</p>
+
+				<p>
+					<label for="author">Author</label>
+				</p>
+
+				<p>
+					<input type="text" th:field="*{author}" id="author"
+						th:value="*{author}">
+				</p>
+
+				<p>
+					<button type="submit" class="custbutton"
+						onclick="return confirm('Save changes ?');">Save</button>
+				</p>
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>
