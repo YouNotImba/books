@@ -4,65 +4,18 @@
 <meta charset="UTF-8" />
 <title>Book crud</title>
 <link rel="stylesheet" href="../static/css/tableGen.css"
-	th:href="@{/css/tableGen.css}">
+	data-th-href="@{/css/tableGen.css}">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	$("#opener").click(function(){
-		$("#createbook").toggle(700);
-		});
-});
-</script>
-<script
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
-<script>
-$(document).ready(function(){
-	$("#addbookform").validate({
-	rules : {
-		title : {
-				required : true,
-				minlength: 5
-			},
-		author : {
-				required : true
-			}	
-		}
-		});
-});
-</script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<!-- <script src="../static/js/jquery.confirm.js" th:src="@{/js/jquery.confirm.js}"></script> -->
-<script src="jquery.confirm.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script>
-$(document).ready(function{
-
-	$('.custbutton2').click(function(){
-
-		$.confirm({
-			'title'		: 'Delete Confirmation',
-			'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
-			'buttons'	: {
-				'Yes'	: {
-					
-					'action': function(){					
-					}
-				},
-				'No'	: {
-					
-					'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
-				}
-			}
-		});
-
-	});
-			
-});
-</script>
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
 
 </head>
 <body>
@@ -73,38 +26,30 @@ $(document).ready(function{
 					alt="Books" />
 			</p>
 		</div>
-
+		
 		<div id="content">
 			<div id="block1">
 				<button id="opener" class="custbutton">Add book</button>
 
-				<div id="createbook" title="Create book" class="hidden">
-					<fieldset>
+				<div id="createbook" title="Create book" class="hiddenbookdiv">
+					<fieldset class="addbookfield">
 						<legend>
 							<h2>Add book</h2>
 						</legend>
-						<form id="addbookform" action="#" th:action="@{/main}"
-							th:object="${bookToCreate}" method="post">
+						<form id="addbookform" class="addbookformclass" ClientIdMode="Static" action="#"
+							th:action="@{/main}" th:object="${bookToCreate}" method="post">
 
 							<label for="title">Title</label> <br /> <input type="text"
 								th:field="*{title}" id="title" name="title"> <br />
-							<!-- <script>
-                            Spring.addDecoration(new Spring.ElementDecoration({
-                                elementId : "title",
-                                widgetType : "dijit.form.ValidationTextBox",
-                                widgetAttrs : { required : true, invalidMessage : "A 16-digit credit card number is required.", 
-                                regExp : "[0-9]{16}"  }}));
-                        </script> -->
-
+							
 							<label for="author">Author</label> <br /> <input type="text"
 								th:field="*{author}" id="author" name="author"> <br />
 							<br />
 
 
-							<button type="submit" name="addBook" class="custbutton"
-								onclick="return confirm('Add this book ?');">Add</button>
+							<button type="submit" name="addBook" class="custbutton">Add</button>
 
-							<!-- </fieldset> -->
+						
 						</form>
 					</fieldset>
 				</div>
@@ -121,13 +66,12 @@ $(document).ready(function{
 							<th>Title</th>
 							<th>Author</th>
 							<!-- <th></th> -->
-							<th style="width: 100px;">Action</th>
+							<th style="width: 90px;">Action</th>
 						</tr>
 						<tr th:each="book : ${books}" th:object="${book}">
 							<td th:text="*{id}">Book id</td>
 							<td th:text="*{title}">Book Title</td>
 							<td th:text="*{author}">Book author</td>
-							<!-- <td><a href="#">edit</a></td> -->
 							<td>
 								<table style="border: none">
 									<tr style="border: none">
@@ -135,12 +79,9 @@ $(document).ready(function{
 											th:href="@{'/edit/' + *{id}}">edit</a></td>
 										<td style="border: none">
 											<form action="#" th:action="@{'/edit/' + *{id}}"
-												method="post" th:method="post">
-												<button id="deletebtn" class="custbutton2" name="deleteBook"
-													type="submit">delete</button>
-												<!-- onclick="return confirm('Are you sure you want to delete this item?');" -->
-												<!-- 	type="submit">delete</button> -->
-
+											class="deleteform"	method="post" th:method="post">
+												<button id="deletebtn" class="custbutton2" type="submit">delete</button>
+												
 											</form>
 										</td>
 									</tr>
@@ -155,5 +96,67 @@ $(document).ready(function{
 		<div th:include="footer :: footer"
 			style="position: fixed; bottom: 2px; width: 100%; display: block;">...</div>
 	</div>
+
+	<!--*****SCRIPTS***** -->
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<script src="/js/jquery.confirm.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+
+<script>
+$(document).ready(function(){
+	
+		$(".custbutton2").confirm({
+		    text: "Are you sure you want to delete that item?",
+		    confirm: function() {
+		       $(".deleteform").submit();
+		    },
+		    cancel: function() {
+		        // nothing to do
+		    }
+		});
+	
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	$("#createbook").hide();
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	$("#opener").click(function(){
+		$("#createbook").toggle(700);
+		});
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	$(".addbookformclass").validate({
+	rules : {
+		title : {
+				required : true,
+				minlength: 5
+			},
+		author : {
+				required : true
+			}	
+		}
+	});
+});
+</script>
+
 </body>
 </html>

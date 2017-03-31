@@ -43,12 +43,12 @@ th, td {
 	cursor: pointer;
 }
 
-.hidden {
+.hiddenbookdiv {
 	display: none;
 	min-height: 150px;
 }
 
-fieldset {
+.addbookfield {
 	padding-top: 20px;
 	border: 1px solid black;
 	margin-left: 10px;

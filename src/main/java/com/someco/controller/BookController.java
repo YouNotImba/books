@@ -36,10 +36,10 @@ public class BookController {
 		this.bookService = bookService;
 	}
 	
-	/*@RequestMapping ("/")
+	@RequestMapping ("/index")
 	public String index(){
 		return "index";
-	}*/
+	}
 	
 	@RequestMapping (value = {"/main","/"},method = RequestMethod.GET)
 	public String main(Model model){
@@ -56,7 +56,7 @@ public class BookController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping (value = "/edit/{id}" , params = {"deleteBook"} ,method = RequestMethod.POST)
+	@RequestMapping (value = "/edit/{id}" , method = RequestMethod.POST)
 	public String deleteBook(@PathVariable Long id){
 		bookService.delete(id);
 		return "redirect:/main";
