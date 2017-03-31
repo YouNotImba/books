@@ -1,6 +1,8 @@
 package com.someco.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +46,12 @@ public class BookController {
 	@RequestMapping (value = {"/main","/"},method = RequestMethod.GET)
 	public String main(Model model){
 		List<Book> books = bookService.getAllBooks();
-		model.addAttribute("books", books);
+		Set<Book> books1 = new HashSet<>();
+		for (Book book : books) {
+			if(book.getUser() != null)
+				books1.add(book);
+		}
+		model.addAttribute("books", books1);
 		model.addAttribute("bookToCreate", new Book());
 		return "main";
 	}

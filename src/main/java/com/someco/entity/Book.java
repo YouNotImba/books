@@ -1,9 +1,11 @@
 package com.someco.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author ikarmatsky
@@ -20,6 +22,9 @@ public class Book implements DomainObject{
 	private String title;
 	
 	private String author;
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	private User user;
 
 	public Book(String title, String author) {
 		super();
@@ -53,6 +58,14 @@ public class Book implements DomainObject{
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
