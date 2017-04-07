@@ -15,7 +15,6 @@ import com.someco.entity.User;
  *
  */
 @Repository ("userRepository")
-@Transactional
 public class UserDataRepository implements DataRepository<User>{
 
 	@PersistenceContext

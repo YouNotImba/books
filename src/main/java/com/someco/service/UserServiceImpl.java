@@ -2,6 +2,8 @@ package com.someco.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.someco.repository.DataRepository;
  */
 @SuppressWarnings("rawtypes")
 @Service ("userService")
+@Transactional
 public class UserServiceImpl implements UserService{
 
 	private static final Log LOGGER = LogFactory.getLog(UserServiceImpl.class);

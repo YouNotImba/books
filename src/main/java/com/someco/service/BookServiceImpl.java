@@ -2,6 +2,7 @@ package com.someco.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +19,7 @@ import com.someco.repository.DataRepository;
  */
 @Service ("bookService")
 @SuppressWarnings("rawtypes")
+@Transactional
 public class BookServiceImpl implements BookService{
 
 	private static final Log LOGGER = LogFactory.getLog(BookServiceImpl.class);

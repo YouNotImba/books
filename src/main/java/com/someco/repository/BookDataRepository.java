@@ -3,9 +3,11 @@ package com.someco.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.someco.entity.Book;
@@ -15,7 +17,6 @@ import com.someco.entity.Book;
  *
  */
 @Repository("bookRepository")
-@Transactional
 public class BookDataRepository implements DataRepository<Book> {
 
 	@PersistenceContext
@@ -32,7 +33,7 @@ public class BookDataRepository implements DataRepository<Book> {
 
 	@Override
 	public void update(Book entity) {
-		// entityManager.merge(entity);
+		//entityManager.merge(entity);
 		entityManager
 				.createQuery("update Book set author = :author, title = :title where id = :id")
 				.setParameter("author", entity.getAuthor()).setParameter("title", entity.getTitle())

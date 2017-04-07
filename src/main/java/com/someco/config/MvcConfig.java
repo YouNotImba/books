@@ -1,5 +1,6 @@
 package com.someco.config;
 
+import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,16 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+	
+	/*@Bean
+	public JettyEmbeddedServletContainerFactory  jettyEmbeddedServletContainerFactory() {
+	    JettyEmbeddedServletContainerFactory jettyContainer = 
+	        new JettyEmbeddedServletContainerFactory();
+	      
+	    jettyContainer.setPort(9000);
+	//    jettyContainer.setContextPath("/");
+	    return jettyContainer;
+	}*/
 	
 	@Bean (name = "messageSource")
 	public MessageSource messageSource(){

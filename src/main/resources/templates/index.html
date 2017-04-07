@@ -17,12 +17,25 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous" >
 
+<link rel="stylesheet" href="../static/css/tableGen.css"
+	data-th-href="@{/css/tableGen.css}">
+
 </head>
 <body>
 	<div class="container">
 		
-
-		<a href="home" class="confirm">Go to home</a>
+		
+		<table id="table-1">
+			<caption align="top" >Books</caption>
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Author</th>
+				</tr>
+			</tbody>	
+		</table>
+		
 
 	</div>
 	<script
@@ -36,6 +49,24 @@
 	<script src="/js/jquery.confirm.js"	></script>
 	<script>
 		$(".confirm").confirm();
+	</script>
+	<script>
+		$(document).ready(function(){
+			$.getJSON('http://localhost:8080/api/books',function(data){
+					$.each(data,function(i,value){
+						var newrow = "<tr>";
+							newrow += "<td>" + value.id + "</td>";
+							newrow += "<td>" + value.title + "</td>";
+							newrow += "<td>" + value.author + "</td>";
+							/* $.each(value,function(idx,dta){
+								newrow += "<td>" + dta + "</td>";	
+							}); */
+							newrow += "</tr>";
+							$("#table-1").append(newrow);				
+					});
+					
+			});
+		});
 	</script>
 
 </body>

@@ -6,6 +6,9 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,6 +57,12 @@ public class BookController {
 		model.addAttribute("books", books1);
 		model.addAttribute("bookToCreate", new Book());
 		return "main";
+	}
+	
+	@RequestMapping (value = "/api/books" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Book>> getAllBooksInJson(){
+		List<Book> books = bookService.getAllBooks();
+		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
 	}
 	
 	@RequestMapping (value = "/main" , params = {"addBook"} , method = RequestMethod.POST)

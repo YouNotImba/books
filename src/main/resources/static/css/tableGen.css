@@ -32,6 +32,10 @@ th, td {
 	color: white;
 }
 
+.custbutton:hover {
+	background-color: #4CAF95;	
+}
+
 .custbutton2 {
 	background-color: #4CAF50;
 	border: 1px white;
